@@ -1,0 +1,69 @@
+.box {
+    border: 5px double #FCCFAC;
+    margin: 10px 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* 文字樣式 */
+.highlight-hover {
+    display: inline-block;
+    position: relative;
+}
+
+/* 默認狀態下沒有下劃線 */
+.highlight-hover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 20px;
+    /* 螢光筆的粗度 */
+    background-color: rgba(235, 187, 203, 0.8);
+    /* 螢光筆顏色，這裡選用螢光黃 */
+    transition: width 0.3s ease, left 0.3s ease;
+    z-index: -100;
+}
+
+/* 滑鼠游標進入時，橫條從中間延伸出來 */
+.highlight-hover:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.lyric {
+    margin-top: 10px;
+    height: 250px;
+    overflow: scroll;
+    text-align: center;
+}
+
+.map {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
+    overflow: hidden;
+
+}
+
+.bg-magenta {
+    background-color: #ff5fa2;
+}
+
+button.bg-magenta:hover{
+    background-color: #f81775;
+}
+
+.bg-apricot {
+    background-color: #FCCFAC;
+}
+
+.text-magenta {
+    color: #FF5FA2;
+}
+
+.text-apricot {
+    color: #FCCFAC;
+}
