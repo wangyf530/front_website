@@ -32,27 +32,12 @@
     left: 0;
 }
 
-.lyric {
-    margin-top: 10px;
-    height: 250px;
-    overflow: scroll;
-    text-align: center;
-}
-
-.map {
-    width: 100%;
-    height: 100%;
-    vertical-align: middle;
-    text-align: center;
-    overflow: hidden;
-
-}
 
 .bg-magenta {
     background-color: #ff5fa2;
 }
 
-button.bg-magenta:hover{
+button.bg-magenta:hover {
     background-color: #f81775;
 }
 
@@ -66,4 +51,42 @@ button.bg-magenta:hover{
 
 .text-apricot {
     color: #FCCFAC;
+}
+
+/* 主图片区域占满页面宽度，高度为20% */
+.carousel {
+    width: 100%;
+    height: 20vh;
+    /* 20% 的页面高度 */
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 确保图片覆盖整个区域 */
+}
+
+/* 页脚样式 */
+.footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* 中间内容区的样式 */
+.content-area {
+    min-height: 60vh;
+    /* 设置中间区域的高度，可以根据需要调整 */
+    padding: 20px;
+}
+
+.about-menu{
+    background-color: lightskyblue;
+    border-radius: 10px;
+}
+
+a{
+    text-decoration: unset;
+    color:black;
 }
