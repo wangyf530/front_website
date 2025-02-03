@@ -1,7 +1,7 @@
 <?php
 session_start();
 class DB{
-    protected $dsn = "mysql:host=localhost; charset=utf8; dbname=db10";
+    protected $dsn = "mysql:host=localhost; charset=utf8; dbname=doorTickets";
     protected $pdo;
     protected $table;
 
@@ -139,15 +139,13 @@ class DB{
             $tmp = $this->a2s($where);
             $sql = $sql . " WHERE " . join(" && ", $tmp);
         }
-        // echo $sql."<br>";
-        // return $this->pdo->query($sql)->fetch();
         return $this->pdo->query($sql)->fetchColumn();
     }
 }
 
 // 最萬用的 但要打sql語法
 function q($sql){
-    $pdo = new PDO("mysql:host=localhost; charset=utf8; dbname=db10",'root','');
+    $pdo = new PDO("mysql:host=localhost; charset=utf8; dbname=doorTickets",'root','');
     return $pdo -> query($sql) -> fetchAll();
 }
 
@@ -164,23 +162,17 @@ function to($url){
 // title
 $TITLE = new DB('titles');
 $AD = new DB('ads');
-$MVIM = new DB('mvims');
-$IMAGE = new DB('images');
+$EVENT = new DB('events');
 $NEWS = new DB('news');
 $ADMIN = new DB('admin');
 $MENU = new DB('menus');
-$TOTAL = new DB('total');
 $BOTTOM = new DB('bottom');
 
-if(!isset($_SESSION['view'])){
-    // echo "hi thanks for your first visit";
-    $_SESSION['view']=1;
-    // db+1
-    $total = $TOTAL->find(1);
-    $total['total'] ++;
-    $TOTAL->save($total);
-} else {
-    // echo "h i thanks for your revisit";
-}
+// if(!isset($_SESSION['view'])){
+//     $_SESSION['view']=1;
+//     $total = $TOTAL->find(1);
+//     $total['total'] ++;
+//     $TOTAL->save($total);
+// }
 
 ?>

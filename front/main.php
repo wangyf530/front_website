@@ -18,7 +18,7 @@
         /* 保留換行符號並自動換行 */
     }
 
-    .limited-text {
+    .limited-texts {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;
@@ -48,11 +48,11 @@
         <div id="demo" class="owl-carousel owl-theme">
             <!-- The slideshow/carousel -->
             <?php
-            $images = $IMAGE->all(['sh' => 1]);
+            $events = $EVENT->all(['sh' => 1]);
             $idx = 0;
-            foreach ($images as $image) {
-                echo "<div class='item' style='width:400px; height:200px; overflow:hidden'>";
-                echo "<img src='./upload/{$image['img']}' alt='pic' style='width:400px; height:200px;'>";
+            foreach ($events as $event) {
+                echo "<div class='item' style='width:700px; height:300px; overflow:hidden'>";
+                echo "<img src='./upload/{$event['img']}' alt='pic' style='width:700px; height:300px;'>";
                 echo "</div>";
             }
             ?>
@@ -62,25 +62,25 @@
 
 <div class="container">
     <div class="row mx-5">
-        <div class="fs-3 fw-bold border-bottom border-2 my-3">最新消息區
+        <div class="fs-4 fw-bold border-bottom border-2 my-3">最新消息區
             <!-- 當超過一定數量顯示more -->
             <?php
-            if ($NEWS->count(['sh' => 1]) > 5) {
-                echo "<a href='index.php?do=news' style='float:right'> MORE... </a>";
+            if ($NEWS->count(['sh' => 1]) > 6) {
+                echo "<a href='index.php?do=news' style='float:right; font-size:14px; position:bottom;'> MORE... </a>";
             }
             ?>
         </div>
         <!-- 最新消息列表 -->
         <div class="col-12">
-            <ul class="news d-flex flex-wrap" style="list-style-type:decimal;">
+            <ul class="news d-flex flex-wrap" style="list-style-type:disc;">
                 <?php
-                $news = $NEWS->all(['sh' => 1], " limit 5");
+                $news = $NEWS->all(['sh' => 1], " limit 6");
                 foreach ($news as $list) {
                     echo "<li class='col-lg-6 col-md-6 col-sm-12 limited-text pe-2 mb-3'>";
                     // echo mb_substr($list['text'], 0, 15) . "...";
-                    echo dd($list['text']);
+                    echo dd($list['title']);
                     echo "<span class='all' style='display:none'>";
-                    echo $list['text'];
+                    echo $list['title'];
                     echo "</span>";
                     echo "</li>";
                 }
@@ -95,7 +95,28 @@
 
 
 <!-- 活動列表 -->
- 
+<div class="container">
+    <div class="row mx-5">
+        <div class="fs-4 fw-bold border-bottom border-2 my-3">活動資訊
+            <a href='index.php?do=events' style='float:right; font-size:14px; position:bottom;'> MORE... </a>
+        </div>
+        <!-- 活動列表 -->
+        <div class="col-12">
+            <ul class="news d-flex flex-wrap" style="list-style-type:decimal;">
+                <?php
+                $events = $EVENT->all(['sh' => 1], " limit 6");
+                foreach ($events as $event):
+                    ?>
+                <div class='col-lg-4 col-md-6 col-sm-12 pe-2 mb-3'>
+                    <div class="">PIC</div>
+                    <div class="">DATE</div>
+                    <div class="">TITLE</div>
+                </div>
+                <?php endforeach;?>
+            </ul>
+        </div>
+    </div>
+</div>
 
 
 <script>

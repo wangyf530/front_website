@@ -23,7 +23,7 @@
     <!-- nav -->
     <nav class="navbar navbar-expand-sm  sticky-top bg-light navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand image-logo" href="#">
+            <a class="navbar-brand image-logo" href="index.php">
                 <img src="./upload/<?= $TITLE->find(['sh' => 1])['img']; ?>" alt="icon" class="header-logo" style="max-height: 5vh;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
         <!-- footer -->
         <div class="container-fluid">
             <div class="row">
-                <span class="col-12 text-center bg-warning" style="line-height:123px;">
+                <span class="col-12 text-center bg-info" style="line-height:123px;">
                     <?= $BOTTOM->find(1)['bottom']; ?>
                 </span>
             </div>
