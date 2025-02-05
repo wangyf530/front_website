@@ -1,11 +1,11 @@
-<table width="100%">
-    <tbody>
-        <tr>
-            <td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a
-                    href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a>
-            </td>
-            <td><button onclick="document.cookie=&#39;user=&#39;;location.replace(&#39;./api/logout.php&#39;)"
-                    style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
-        </tr>
-    </tbody>
-</table>
+<div class="container-fluid d-flex justify-content-between align-items-center mb-2">
+    <div class="d-flex justify-content-center flex-grow-1">
+        <a href="?do=title" class="text-dark text-decoration-none fw-bold fs-4">
+            後台管理區
+        </a>
+    </div>
+    <div>
+        <button onclick="document.cookie='user=';location.replace('./api/logout.php')"
+            class="btn btn-dark px-4 py-2 text-white">管理登出</button>
+    </div>
+</div>

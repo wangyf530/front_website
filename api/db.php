@@ -2,6 +2,7 @@
 session_start();
 class DB{
     protected $dsn = "mysql:host=localhost; charset=utf8; dbname=doorTickets";
+    // protected $dsn = "mysql:host=localhost; charset=utf8; dbname=s1130205";
     protected $pdo;
     protected $table;
 
@@ -146,6 +147,7 @@ class DB{
 // 最萬用的 但要打sql語法
 function q($sql){
     $pdo = new PDO("mysql:host=localhost; charset=utf8; dbname=doorTickets",'root','');
+    // $pdo = new PDO("mysql:host=localhost; charset=utf8; dbname=s1130205",'root','');
     return $pdo -> query($sql) -> fetchAll();
 }
 
@@ -166,7 +168,7 @@ $EVENT = new DB('events');
 $NEWS = new DB('news');
 $ADMIN = new DB('admin');
 $MENU = new DB('menus');
-$BOTTOM = new DB('bottom');
+$QUESTION = new DB('questions');
 
 // if(!isset($_SESSION['view'])){
 //     $_SESSION['view']=1;

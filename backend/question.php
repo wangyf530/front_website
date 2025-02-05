@@ -1,59 +1,84 @@
-<div class="di"
-    style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
-    <!--正中央-->
-    <?php include_once "logout.php";?>
-    <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
-        <p class="t cent botli">常見問題管理</p>
-        <!-- <form method="post" action="./api/edit_<?=$do;?>.php"> -->
+<div class="container mx-auto">
+    <div class="row">
+        <?php include_once "logout.php"; ?>
+    </div>
+    <div class="row">
+        <div class="text-center border-bottom border-dark border-3 mb-3 fs-5 fw-bold">常見問題管理</div>
         <form method="post" action="./api/edit.php">
-            <table width="100%">
+            <table class="w-100">
                 <tbody>
-                    <tr class="yel">
-                        <td width="50%">標題</td>
-                        <td width="10%">顯示</td>
-                        <td width="10%">刪除</td>
-                        <td>修改</td>
+                    <tr class="text-center bg-secondary bg-gradient text-dark text-white">
+                        <td width="30%">問題</td>
+                        <td width="60%">回答</td>
+                        <td width="5%">顯示</td>
+                        <td width="5%">刪除</td>
                     </tr>
                     <?php
-                        $rows = $QUESTION -> all();
-                        foreach ($rows as $row) {
+                    $div = 10;
+                    $total = $QUESTION->count();
+                    $pages = ceil($total / $div);
+                    $now = $_GET['p'] ?? 1;
+                    $start = ($now - 1) * $div;
+                    $rows = $QUESTION->all(" limit $start,$div");
+                    foreach ($rows as $row) {
                     ?>
-                    <tr>
-                        <td> 
-                            <img src="./upload/<?=$row['img'];?>" style="width:120px; height:80px"> 
-                        </td>
-                        <td>  
-                            <input type="checkbox" name="sh[]" value="<?=$row['id'];?>" <?=($row['sh']==1)?'checked':'';?>>
-                        </td>
-                        <td>  
-                            <input type="checkbox" name="del[]" value="<?=$row['id'];?>"> 
-                        </td>
-                        <td>
-                        <input type="button" onclick="op('#cover','#cvr','./modal/upload_<?=$do;?>.php?id=<?=$row['id'];?>&table=<?=$do;?>')" value="更換動畫">
-                        </td>
-                        <input type="hidden" name="id[]" value="<?=$row['id'];?>">
-                    </tr>
+                        <tr class="text-center">
+                            <td>
+                                <!-- 不能斷行要不然會有空格 -->
+                                <textarea name="title[]" style="width:95%;height:60px"><?= $row['title']; ?></textarea>
+                            </td>
+                            <td>
+                                <!-- 不能斷行要不然會有空格 -->
+                                <textarea name="answer[]" style="width:95%;height:60px"><?= $row['answer']; ?></textarea>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="sh[]" value="<?= $row['id']; ?>" <?= ($row['sh'] == 1) ? 'checked' : ''; ?>>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
+                            </td>
+                            <input type="hidden" name="id[]" value="<?= $row['id']; ?>">
+                        </tr>
                     <?php
-                        }
+                    }
                     ?>
                 </tbody>
             </table>
+            <div class="text-center my-3">
+                <?php
+                if (($now - 1) > 0) {
+                    $prev = $now - 1;
+                    echo "<a href='?do=$do&p=$prev'> < </a>";
+                }
+                for ($i = 1; $i <= $pages; $i++) {
+                    echo "<a href='?do=$do&p=$i' style='font-size:16px;padding:0px 5px;'>";
+                    echo $i;
+                    echo "</a>";
+                }
 
-            <table style="margin-top:40px; width:70%;">
+                if (($now + 1) <= $pages) {
+                    $next = $now + 1;
+                    echo "<a href='?do=$do&p=$next'> > </a>";
+                }
+                ?>
+            </div>
+
+            <table class="w-75 mt-3 mx-auto">
                 <tbody>
                     <tr>
-                        <td width="200px"><input type="button"
-                                onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/<?=$do;?>.php?table=<?=$do;?>&#39;)"
-                                value="新增動畫圖片"></td>
-                        <td class="cent">
-                            <input type="hidden" name="table" value="<?=$do;?>">
-                            <input type="submit" value="修改確定">
-                            <input type="reset" value="重置">
+                        <td class="w-25 text-center">
+                        <input type="button"
+                                onclick="op('#cover','#cvr','./modal/<?= $do; ?>.php?table=<?= $do; ?>')"
+                                value="新增常見問題" class="btn btn-outline-dark">
+                        </td>
+                        <td class="w-75 text-center mx-auto">
+                            <input type="hidden" name="table" value="<?= $do; ?>">
+                            <input type="submit" value="修改確定" class="btn btn-outline-dark">
+                            <input type="reset" value="重置" class="btn btn-outline-dark">
                         </td>
                     </tr>
                 </tbody>
             </table>
-
         </form>
     </div>
 </div>

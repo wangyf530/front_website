@@ -1,108 +1,113 @@
-﻿<?php include_once "api/db.php"; 
-	if(!isset($_SESSION['login'])){
-		echo "請從登入頁登入 <a href='index.php'>管理登入</a>";
-		exit();
-	}
+<?php include_once "api/db.php";
+if (!isset($_SESSION['login'])) {
+    echo "請從登入頁登入 <a href='index.php'>管理登入</a>";
+    exit();
+}
 ?>
+
 <!DOCTYPE html
-	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-	<title>Door售票網</title>
-	<link href="./css/css.css" rel="stylesheet" type="text/css">
-	<script src="./js/jquery-1.9.1.min.js"></script>
-	<script src="./js/js.js"></script>
+    <title>後台管理</title>
+    <!-- 引入 Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="./css/css.css" rel="stylesheet" type="text/css">
+    <script src="./js/js.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
 <body>
-	<div id="cover" style="display:none; ">
-		<div id="coverr">
-			<a style="position:absolute; right:3px; top:4px; cursor:pointer; z-index:9999;"
-				onclick="cl('#cover')">X</a>
-			<div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;">
-			</div>
-		</div>
-	</div>
-	<iframe style="display:none;" name="back" id="back"></iframe>
-	<div id="main">
-		<a title="<?=$TITLE->find(['sh'=>1])['text'];?>" href="index.php">
-			<div class="ti" style="background:url('./upload/<?=$TITLE->find(['sh'=>1])['img'];?>'); background-size:cover;"></div>
-			<!--標題-->
-		</a>
-		<div id="ms">
-			<div id="lf" style="float:left;">
-				<div id="menuput" class="dbor">
-					<!--主選單放此-->
-					<span class="t botli">後台管理選單</span>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=title">
-						<div class="mainmu">
-							網站標題管理 </div>
-					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=ad">
-						<div class="mainmu">
-							動態文字廣告管理 </div>
-					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=mvim">
-						<div class="mainmu">
-							動畫圖片管理 </div>
-					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=image">
-						<div class="mainmu">
-							校園映象資料管理 </div>
-					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=total">
-					<!-- onclick="op('#cover','#cvr','./modal/total.php')"> -->
-						<div class="mainmu" >
-							進站總人數管理 </div>
-					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=bottom">
-					<!-- onclick="op('#cover','#cvr','./modal/bottom.php')"> -->
-						<div class="mainmu">
-							頁尾版權資料管理 </div>
-					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=news">
-						<div class="mainmu">
-							最新消息資料管理 </div>
-					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin">
-						<div class="mainmu">
-							管理者帳號管理 </div>
-					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=menu">
-						<div class="mainmu">
-							選單管理 </div>
-					</a>
+    <!-- 彈出視窗 -->
+    <div id="cover" style="display:none; ">
+        <div id="coverr">
+            <a style="position:absolute; right:3px; top:4px; cursor:pointer; z-index:9999;"
+                onclick="cl('#cover')">X</a>
+            <div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;">
+            </div>
+        </div>
+    </div>
+    <!-- nav -->
+    <nav class="navbar navbar-expand-sm  sticky-top bg-light navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand image-logo" href="index.php">
+                <img src="./upload/<?= $TITLE->find(['sh' => 1])['img']; ?>" alt="icon" class="header-logo" style="max-height: 5vh;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class='nav-item'>
+                        <a class='nav-link' href='?do=title'>
+                            網站標題管理
+                        </a>
+                    </li>
+
+                    <li class='nav-item'>
+                        <a class='nav-link' href='?do=ad'>
+                            動態文字廣告管理
+                        </a>
+                    </li>
+
+                    <li class='nav-item'>
+                        <a class='nav-link' href='?do=event'>
+                            活動管理
+                        </a>
+                    </li>
+
+                    <li class='nav-item'>
+                        <a class='nav-link' href='?do=news'>
+                            最新消息管理
+                        </a>
+                    </li>
+
+                    <li class='nav-item'>
+                        <a class='nav-link' href='?do=question'>
+                            常見問題管理
+                        </a>
+                    </li>
 
 
-				</div>
-			</div>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-			<?php
-			$do = $_GET['do']??'title';
+    <!--主選單-->
+    <div class="container-fluid">
+        <div class='row border border-2 border-secondary rounded mx-5 px-5 py-3'>
+            <!-- 主頁面 -->
+            <?php
+            $do = $_GET['do'] ?? 'main';
+            $file = "./backend/{$do}.php";
 
-			// include "./front/{$do}.php";
-			$file = "./backend/{$do}.php";
+            if (file_exists($file)) {
+                include $file;
+            } else {
+                include "./backend/title.php";
+            }
+            ?>
+        </div>
+
+    </div>
 
 
-			if(file_exists($file)){
-				include $file;
-			} else {
-				include "./backend/title.php";
-			}
-			?>
-
-		</div>
-		<div style="clear:both;"></div>
-		<div style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
-			<span class="t" style="line-height:123px;">
-			<?=$BOTTOM->find(1)['bottom'];?>
-			</span>
-		</div>
-	</div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 </body>
 
 </html>

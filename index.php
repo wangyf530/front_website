@@ -15,7 +15,8 @@
     <link href="./css/css.css" rel="stylesheet" type="text/css">
     <script src="./js/js.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
 <body>
@@ -70,7 +71,7 @@
         <div class="container-fluid">
             <div class="row">
                 <span class="col-12 text-center bg-info" style="line-height:123px;">
-                    <?= $BOTTOM->find(1)['bottom']; ?>
+                    footer
                 </span>
             </div>
         </div>

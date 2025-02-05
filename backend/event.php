@@ -1,33 +1,33 @@
-<div class="di"
-    style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
-    <!--正中央-->
-    <?php include_once "logout.php";?>
-    <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
-        <p class="t cent botli">活動管理</p>
-        <!-- <form method="post" action="./api/edit_<?=$do;?>.php"> -->
+<div class="container mx-auto">
+    <div class="row">
+        <?php include_once "logout.php"; ?>
+    </div>
+    <div class="row">
+        <div class="text-center border-bottom border-dark border-3 mb-3 fs-5 fw-bold">活動管理</div>
         <form method="post" action="./api/edit.php">
-            <table width="100%">
+            <table class="w-100">
                 <tbody>
-                    <tr class="yel">
-                        <td width="50%">活動圖片</td>
-                        <td width="20%">活動標題</td>
-                        <td width="6%">顯示</td>
-                        <td width="6%">刪除</td>
-                        <td>修改</td>
+                    <tr class="text-center bg-secondary bg-gradient text-dark text-white">
+                        <td width="25%">活動縮圖</td>
+                        <td width="20%">主要人物</td>
+                        <td width="20%">標題</td>
+                        <td width="7%">顯示</td>
+                        <td width="7%">刪除</td>
+                        <td width="15%"></td>
                     </tr>
                     <?php
-                        $div = 3;
-                        $total = $IMAGE->count();
-                        $pages = ceil($total/$div);
-                        $now = $_GET['p']??1;
-                        $start = ($now - 1)*$div;
-                        $rows = $IMAGE->all(" limit $start,$div");
-                        // $rows = $IMAGE -> all();
+                        $rows = $EVENT -> all();
                         foreach ($rows as $row) {
                     ?>
-                    <tr>
+                    <tr class="text-center">
                         <td> 
-                            <img src="./upload/<?=$row['img'];?>" style="widh:120px; height:80px">  
+                        <img src="./upload/<?=$row['img'];?>" class="mx-auto d-block" style="width:210px; height:90px;">   
+                        </td>
+                        <td> 
+                            <input type="text" name="artist[]" value="<?=$row['artist'];?>">    
+                        </td>
+                        <td> 
+                            <input type="text" name="title[]" value="<?=$row['title'];?>">    
                         </td>
                         <td>  
                             <input type="checkbox" name="sh[]" value="<?=$row['id'];?>" <?=($row['sh']==1)?'checked':'';?>>
@@ -35,10 +35,9 @@
                         <td>  
                             <input type="checkbox" name="del[]" value="<?=$row['id'];?>"> 
                         </td>
-                        <td>
-                        <input type="button" onclick="op('#cover','#cvr','./modal/upload_<?=$do;?>.php?id=<?=$row['id'];?>&table=<?=$do;?>')" value="更換圖片">
+                        <td>  
+                        <input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/submenu.php?id=<?=$row['id'];?>&#39;)" value="編輯活動"> 
                         </td>
-
                         <input type="hidden" name="id[]" value="<?=$row['id'];?>">
                     </tr>
                     <?php
@@ -46,31 +45,12 @@
                     ?>
                 </tbody>
             </table>
-            <div class="cent">
-                <?php
-                if(($now-1)>0){
-                    $prev = $now-1;
-                   echo "<a href='?do=$do&p=$prev'> < </a>";
-                }
-                for ($i=1; $i <= $pages; $i++) { 
-                    $size = ($i==$now)?"24px":"16px";
-                    echo "<a href='?do=$do&p=$i' style='font-size:$size;padding:0px 5px;'>";
-                    echo $i;
-                    echo "</a>";
-                }
-
-                if(($now+1)<=$pages){
-                    $next = $now+1;
-                   echo "<a href='?do=$do&p=$next'> > </a>";
-                }
-                ?>
-            </div>
             <table style="margin-top:40px; width:70%;">
                 <tbody>
                     <tr>
                         <td width="200px"><input type="button"
-                                onclick="op('#cover','#cvr','./modal/<?=$do;?>.php?table=<?=$do;?>')"
-                                value="新增活動"></td>
+                                onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/<?=$do;?>.php?table=<?=$do;?>&#39;)"
+                                value="新增主選單"></td>
                         <td class="cent">
                             <input type="hidden" name="table" value="<?=$do;?>">
                             <input type="submit" value="修改確定">

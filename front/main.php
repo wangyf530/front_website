@@ -18,13 +18,14 @@
         /* 保留換行符號並自動換行 */
     }
 
-    .limited-texts {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        overflow: hidden;
+    .limited-text {
+        word-wrap: break-word;
+        /* 讓長單字換行 */
+        overflow-wrap: break-word;
+        /* 確保內容換行 */
         white-space: normal;
-        height:22px;
+        /* 允許換行 */
+        max-width: 100%;
     }
 </style>
 
@@ -60,25 +61,21 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" style="background:#eee">
     <div class="row mx-5">
         <div class="fs-4 fw-bold border-bottom border-2 my-3">最新消息區
-            <!-- 當超過一定數量顯示more -->
-            <?php
-            if ($NEWS->count(['sh' => 1]) > 6) {
-                echo "<a href='index.php?do=news' style='float:right; font-size:14px; position:bottom;'> MORE... </a>";
-            }
-            ?>
+            <!-- 顯示more -->
+            <a href='index.php?do=news' style='float:right; font-size:14px; position:bottom;'> MORE... </a>
         </div>
         <!-- 最新消息列表 -->
         <div class="col-12">
-            <ul class="news d-flex flex-wrap" style="list-style-type:disc;">
+            <ul class="news d-flex flex-wrap flex-coloumn" style="list-style-type:disc; list-style-position:inside;">
                 <?php
                 $news = $NEWS->all(['sh' => 1], " limit 6");
                 foreach ($news as $list) {
                     echo "<li class='col-lg-6 col-md-6 col-sm-12 limited-text pe-2 mb-3'>";
-                    // echo mb_substr($list['text'], 0, 15) . "...";
-                    echo dd($list['title']);
+                    // echo dd($list['title']);
+                    echo "<span>" . htmlspecialchars($list['title']) . "</span>";
                     echo "<span class='all' style='display:none'>";
                     echo $list['title'];
                     echo "</span>";
@@ -106,13 +103,15 @@
                 <?php
                 $events = $EVENT->all(['sh' => 1], " limit 6");
                 foreach ($events as $event):
-                    ?>
-                <div class='col-lg-4 col-md-6 col-sm-12 pe-2 mb-3'>
-                    <div class="">PIC</div>
-                    <div class="">DATE</div>
-                    <div class="">TITLE</div>
-                </div>
-                <?php endforeach;?>
+                ?>
+                    <div class='col-lg-4 col-md-6 col-sm-12 pe-2 mb-3 text-center'>
+                        <div class="">
+                            <img src="./upload/<?= $event['img']; ?>" class="mx-auto d-block" style="width:80%;">
+                        </div>
+                        <div class=""><?=$event['ondate'];?></div>
+                        <div class="fw-bold"><?=$event['title'];?></div>
+                    </div>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>
