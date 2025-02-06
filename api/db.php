@@ -9,6 +9,7 @@ class DB{
     function __construct($table){
         $this -> table = $table;
         $this -> pdo = new PDO($this->dsn,'root','');
+        // $this -> pdo = new PDO($this->dsn,'s1130205','s1130205');
     }
 
     /**
@@ -147,7 +148,7 @@ class DB{
 // 最萬用的 但要打sql語法
 function q($sql){
     $pdo = new PDO("mysql:host=localhost; charset=utf8; dbname=doorTickets",'root','');
-    // $pdo = new PDO("mysql:host=localhost; charset=utf8; dbname=s1130205",'root','');
+    // $pdo = new PDO("mysql:host=localhost; charset=utf8; dbname=s1130205",'s1130205','s1130205');
     return $pdo -> query($sql) -> fetchAll();
 }
 

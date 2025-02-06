@@ -1,5 +1,5 @@
 <style>
-	.news-list-item{
+	.question-list-item{
 		padding:5px;
 		margin: 10px auto;
 		border-bottom: 1px solid #ccc;
@@ -15,20 +15,19 @@
 
 		<!-- 列表 -->
 		<div class="col-12">
-			<ul class="news">
+			<ul class="questions">
 				<?php
 				$div = 10;
-				$total = $NEWS->count();
+				$total = $QUESTION->count();
 				$pages = ceil($total / $div);
 				$now = $_GET['p'] ?? 1;
 				$start = ($now - 1) * $div;
-				$rows = $NEWS->all(" limit $start,$div");
+				$rows = $QUESTION->all(" limit $start,$div");
 				// 數字從哪個開始
-				echo "<ul class='news-list'>";
+				echo "<ul class='question-list'>";
 				foreach ($rows as $list) {
-					echo "<li class='news-list-item'>";
-					echo "<span class='news-list-date'>{$list['date']} &nbsp;</span>";
-					echo "<a href='?do=news&id={$list['id']}'>";
+					echo "<li class='question-list-item'>";
+					echo "<a href='?do=question&id={$list['id']}'>";
 					echo $list['title'];
 					echo "</a>";
 					echo "</li>";
