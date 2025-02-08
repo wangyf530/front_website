@@ -6,7 +6,7 @@
 	}
 </style>
 
-<div class="container">
+<div class="container vh-100 position-relative">
 	<div class="row mx-5">
 		<!-- 標題 -->
 		<div class="fs-4 fw-bold border-bottom border-4 border-dark my-3" style="width:fit-content">
@@ -40,7 +40,7 @@
 
 
 	<!-- 切換頁 -->
-	<div class="cent">
+	<div class="cent position-absolute bottom-0 start-50 translate-middles">
 		<?php
 		if (($now - 1) > 0) {
 			$prev = $now - 1;
