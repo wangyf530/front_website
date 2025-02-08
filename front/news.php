@@ -116,7 +116,7 @@
 </div>
 
 
-<script src="../pw/pw.js"></script>
+<script src="./info/info.js"></script>
 
 <script>
 	$(document).ready(function() {
