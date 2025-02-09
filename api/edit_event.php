@@ -5,12 +5,12 @@
         foreach ($_POST['id'] as $idx => $id) {
             // if del
             if(isset($_POST['del']) && in_array($id, $_POST['del'])){
-                $MENU->del($id);
+                $EVENT->del($id);
             } else {
-                $row = $MENU->find($id);
+                $row = $EVENT->find($id);
                 $row['text']=$_POST['text'][$idx];
                 $row['href']=$_POST['href'][$idx];
-                $MENU->save($row);
+                $EVENT->save($row);
             }
         }
     }
@@ -22,11 +22,11 @@
                 $row['text'] = $text;
                 $row['href'] = $_POST['href2'][$idx];
                 $row['main_id'] = $_POST['main_id'];
-                $MENU->save($row);
+                $EVENT->save($row);
 
             }
         }
     }
 
-    to("../admin.php?do=menu");
+    to("../admin.php?do=event");
 ?>

@@ -86,7 +86,7 @@ if (!isset($_SESSION['login'])) {
         <div class='row border border-2 border-secondary rounded mx-5 px-5 py-3'>
             <!-- 主頁面 -->
             <?php
-            $do = $_GET['do'] ?? 'main';
+            $do = $_GET['do'] ?? 'title';
             $file = "./backend/{$do}.php";
 
             if (file_exists($file)) {

@@ -36,7 +36,7 @@
                             <input type="checkbox" name="del[]" value="<?=$row['id'];?>"> 
                         </td>
                         <td>  
-                        <input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/submenu.php?id=<?=$row['id'];?>&#39;)" value="編輯活動"> 
+                        <input type="button" onclick="op('#cover','#cvr','./modal/edit_event.php?id=<?=$row['id'];?>')" value="編輯活動"> 
                         </td>
                         <input type="hidden" name="id[]" value="<?=$row['id'];?>">
                     </tr>
@@ -49,7 +49,7 @@
                 <tbody>
                     <tr>
                         <td width="200px"><input type="button"
-                                onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/<?=$do;?>.php?table=<?=$do;?>&#39;)"
+                                onclick="op('#cover','#cvr','./modal/<?=$do;?>.php?table=<?=$do;?>')"
                                 value="新增活動"></td>
                         <td class="cent">
                             <input type="hidden" name="table" value="<?=$do;?>">
