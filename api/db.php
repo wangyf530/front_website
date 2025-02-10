@@ -1,7 +1,7 @@
 <?php
 session_start();
 class DB{
-    protected $dsn = "mysql:host=localhost; charset=utf8; dbname=doorTickets";
+    protected $dsn = "mysql:host=localhost; charset=utf8; dbname=doortickets";
     // protected $dsn = "mysql:host=localhost; charset=utf8; dbname=s1130205";
     protected $pdo;
     protected $table;
